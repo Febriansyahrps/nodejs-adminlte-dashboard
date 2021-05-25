@@ -1,0 +1,74 @@
+extends ../layout/base 
+block content 
+	section.content-header 
+		h1 
+			| Edit Barang
+			small menu for editing barang data
+		ol.breadcrumb 
+			li 
+				a(href='#') 
+					i.fa.fa-dashboard
+					| Level 
+			li.active Here 
+	section.content
+		.box
+			.box-header.with-border
+				h3.box-title
+					| Barang
+				.box-tools.pull-right
+					button(type='button', data-widget='collapse', data-toggle='tooltip',title='collapse').btn.btn-box-tool
+						i.fa.fa-minus
+					
+			.box-body
+				form(role='form',method='post' action='/barang/edit/#{(kode==undefined) ? data.kode : kode}')
+					.row
+						
+						.col-xs-6
+							.box-body
+								- if (messages.msg_error) 
+									.alert.alert-danger.alert-dismissable 
+										button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Alert! 
+										| !{messages.msg_error}
+								- if (messages.msg_info) 
+									.alert.alert-success.alert-dismissable 
+										button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Success! 
+										| !{messages.msg_info}
+								.form-group
+									label
+										| Kode
+									input(type='text',value="#{data.kode}",name='kode',placeholder='Masukkan Kode', autofocus).form-control
+								.form-group
+									label
+										| Nama
+									input(type='text',value="#{ (nama == undefined) ? data.nama : nama }",name='nama',placeholder='Masukkan Nama').form-control
+								.form-group
+									label
+										| Merek
+									input(type='text',value="#{ (merek == undefined) ? data.merek : merek }",name='merek',placeholder='Masukkan Merek').form-control
+								.form-group
+									label
+										| Satuan
+									input(type='text',value="#{ (satuan == undefined) ? data.satuan : satuan }",name='satuan',placeholder='Masukkan Satuan').form-control
+								.form-group
+									label
+										| Jumlah
+									input(type='text',value="#{ (jumlah == undefined) ? data.jumlah : jumlah }",name='jumlah',placeholder='Masukkan Jumlah').form-control
+								.form-group
+									label
+										| Harga
+									input(type='text',value="#{ (harga == undefined) ? data.harga : harga }",name='harga',placeholder='Masukkan Harga').form-control
+							.box-footer
+								input(type="hidden",name="_method", value="PUT")
+								button(type='submit').btn.btn-primary
+									i.fa.fa-pencil 
+									|  Edit
+								a(href='/barang').btn.btn-primary.pull-right
+									| Back
